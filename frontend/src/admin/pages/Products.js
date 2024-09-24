@@ -11,6 +11,10 @@ import ProductTable from '../components/ProductTable';
 import AddProductModal from '../components/AddProductModal';
 import ProductModal from '../components/UpdateProductModal';
 
+
+import { FiPlus } from "react-icons/fi";
+
+
 const Products = () => {
   const [bestSellingCount, setBestSellingCount] = useState(0);
   const [totalQuantity, setTotalQuantity] = useState(0);
@@ -114,32 +118,47 @@ const Products = () => {
               <TopProduct />
             </div>
 
-            <div className='product-two'>
-              <div className='order-header'>
-                <div className='order-search'>
-                  <form>
-                    <input type='search' placeholder="Search products..." />
-                    <button type="submit">Search</button>
-                  </form>
-                </div>
+            <div className='product-two d-flex justify-content-between'>
+              <div className='order-header border border-primary d-flex justify-content-between'>
+                
 
-                <div className='order-options'>
-                  <div className='order-print'>
-                    <button>Print Order Summary</button>
+                <div className='d-flex justify-content-between align-items-center order-options  border border-danger'>
+
+                  <div className='col-auto order-search '>
+                    <form class="d-flex">
+                      <input type='search' placeholder="Search products..." />
+                      <button type="submit">Search</button>
+                    </form>
                   </div>
-                  <div className='order-sort'>
-                    <label htmlFor="sort">Sort By</label>
-                    <select name="sort" id="sort">
-                      <option value="date">Date</option>
-                      <option value="status">Status</option>
-                      <option value="id">ID</option>
-                      <option value="customer-id">Customer</option>
-                    </select>
+                  
+                  <div className='col-auto order-print'>
+                    <div className='d-flex justify-content-between align-items-center'>
+                    <div className='col-auto order-print'>
+                      <button>Print Order Summary</button>
+                    </div>
+
+                    <div className='col-auto order-sort d-flex align-items-center'>
+                      <div class="d-flex align-items-center">
+                        <label class="m-0" htmlFor="sort">Sort By</label>
+                      </div>
+                      <div>
+                        <select name="sort" id="sort" class="ms-2">
+                          <option value="date">Date</option>
+                          <option value="status">Status</option>
+                          <option value="id">ID</option>
+                          <option value="customer-id">Customer</option>
+                        </select>
+                      </div>
+                      
+                    
+                    </div>
+
+                    <div className='col-auto  order-add'>
+                      <Button variant="primary" onClick={handleShowAddModal}>
+                        <FiPlus class="me-2"/>Add Product
+                      </Button>
+                    </div>
                   </div>
-                  <div className='order-add'>
-                    <Button variant="primary" onClick={handleShowAddModal}>
-                      Add Product
-                    </Button>
                   </div>
                 </div>
               </div>

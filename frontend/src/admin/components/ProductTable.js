@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Button } from 'react-bootstrap';
 import axios from 'axios';
 import UpdateProductModal from './UpdateProductModal';
+import './ProductTable.css';
 
 const ProductTable = () => {
     const [products, setProducts] = useState([]);
@@ -43,9 +44,9 @@ const ProductTable = () => {
 
     return (
         <>
-            <div className='order-table table-responsive'>
-                <table className="table">
-                    <thead>
+            <div className='order-table table-responsive mt-4'>
+                <table className="table ">
+                    <thead class="sticky-header">
                         <tr>
                             <th><input type='checkbox' /></th>
                             <th>Product Code</th>

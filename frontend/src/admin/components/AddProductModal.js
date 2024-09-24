@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
 
 const AddProductModal = ({ show, handleClose, handleSubmit }) => {
+    const [productImage, setProductImage] = useState('');
+    const [productCode, setProductCode] = useState('');
     const [productName, setProductName] = useState('');
     const [description, setDescription] = useState('');
     const [category, setCategory] = useState('');
@@ -39,7 +41,7 @@ const AddProductModal = ({ show, handleClose, handleSubmit }) => {
     const handleFormSubmit = async (e) => {
         e.preventDefault();
     
-        if (!productName || !description || !category || !price || !quantity) {
+        if (!productImage || !productCode || !productName || !description || !category || !price || !quantity) {
             setError('Please fill out all required fields.');
             return;
         }
@@ -51,6 +53,8 @@ const AddProductModal = ({ show, handleClose, handleSubmit }) => {
         }
     
         const productData = {
+            productImage,
+            productCode,
             productName,
             description,
             category,
@@ -91,6 +95,29 @@ const AddProductModal = ({ show, handleClose, handleSubmit }) => {
             <Modal.Body>
                 {error && <div className="alert alert-danger">{error}</div>}
                 <Form onSubmit={handleFormSubmit}>
+
+                    <Form.Group controlId="formProductImage">
+                        <Form.Label>Product URL</Form.Label>
+                        <Form.Control
+                            type="text"
+                            placeholder="Enter product url"
+                            value={productImage}
+                            onChange={(e) => setProductImage(e.target.value)}
+                            required
+                        />
+                    </Form.Group>
+                    <Form.Group controlId="formProductCode">
+                        <Form.Label>Product Code</Form.Label>
+                        <Form.Control
+                            type="text"
+                            placeholder="Enter product code"
+                            value={productCode}
+                            onChange={(e) => setProductCode(e.target.value)}
+                            required
+                        />
+                    </Form.Group>
+
+
                     <Form.Group controlId="formProductName">
                         <Form.Label>Product Name</Form.Label>
                         <Form.Control

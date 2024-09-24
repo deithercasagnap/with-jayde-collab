@@ -20,9 +20,11 @@ router.post('/add-product', async (req, res) => {
     try {
         console.log('Request body:', req.body);
 
-        const { productName, description, category, price, quantity, expirationDate, size } = req.body;
+        const {productCode, productName, description, category, price, quantity, expirationDate, size, productImage} = req.body;
 
         console.log('Product details:');
+        console.log('Name:', productImage);
+        console.log('Name:', productCode);
         console.log('Name:', productName);
         console.log('Description:', description);
         console.log('Category ID:', category);
@@ -31,15 +33,15 @@ router.post('/add-product', async (req, res) => {
         console.log('Expiration Date:', expirationDate);
         console.log('Size:', size);
 
-        // Generate unique product code
-        const productCode = await generateProductCode();
-        console.log('Generated product code:', productCode);
+        // // Generate unique product code
+        // const productCode = await generateProductCode();
+        // console.log('Generated product code:', productCode);
 
         const query = `
-            INSERT INTO product (product_name, description, category_id, price, quantity, expiration_date, product_code, size)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+            INSERT INTO product (product_code, product_name, description, category_id, price, quantity, size, expiration_date, product_image)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
         `;
-        const values = [productName, description, category, price, quantity, expirationDate, productCode, size];
+        const values = [productCode, productName, description, category, price, quantity, size, expirationDate,  productImage];
 
         console.log('Executing query:', query);
         console.log('With values:', values);
