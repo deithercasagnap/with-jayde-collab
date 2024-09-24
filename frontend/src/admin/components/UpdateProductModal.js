@@ -4,13 +4,14 @@ import axios from 'axios';
 
 const UpdateProductModal = ({ show, product, handleClose, handleUpdate }) => {
     const [formData, setFormData] = useState({
+        product_id: '',
         product_code: '',
         product_name: '',
         price: '',
         category_id: '',
         quantity: '',
         description: '',
-        image_url: '',
+        product_image: '',
         size: '', 
         custom_size: '', 
         expiration_date: '' 
@@ -20,13 +21,14 @@ const UpdateProductModal = ({ show, product, handleClose, handleUpdate }) => {
     useEffect(() => {
         if (product) {
             setFormData({
+                product_id: product.product_id || '',
                 product_code: product.product_code || '',
                 product_name: product.product_name || '',
                 price: product.price || '',
                 category_id: product.category_id || '',
                 quantity: product.quantity || '',
                 description: product.description || '',
-                image_url: product.image_url || '',
+                product_image: product.product_image || '',
                 size: product.size || '', 
                 custom_size: product.size && !['500', '100', '150', '200', '250'].includes(product.size) ? product.size : '', // Handle custom size
                 expiration_date: product.expiration_date || '' 
@@ -58,12 +60,12 @@ const UpdateProductModal = ({ show, product, handleClose, handleUpdate }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            if (formData.product_code) {
+            if (formData.product_id) {
                 const dataToSend = {
                     ...formData,
                     size: formData.size === 'Other' ? formData.custom_size : formData.size
                 };
-                await axios.put(`http://localhost:5000/admin-update-products/${formData.product_code}`, dataToSend);
+                await axios.put(`http://localhost:5000/admin-update-products/${formData.product_id}`, dataToSend);
                 handleUpdate(); 
                 handleClose();
             } else {
@@ -92,7 +94,7 @@ const UpdateProductModal = ({ show, product, handleClose, handleUpdate }) => {
                             value={formData.product_code}
                             onChange={handleChange}
                             required
-                            readOnly
+                            
                         />
                     </Form.Group>
                     <Form.Group controlId="formProductName">
@@ -185,8 +187,8 @@ const UpdateProductModal = ({ show, product, handleClose, handleUpdate }) => {
                         <Form.Label>Image URL</Form.Label>
                         <Form.Control
                             type="text"
-                            name="image_url"
-                            value={formData.image_url}
+                            name="product_image"
+                            value={formData.product_image}
                             onChange={handleChange}
                         />
                     </Form.Group>

@@ -41,6 +41,7 @@ const Shop = () => {
                     const response = await axios.get(`http://localhost:5000/recommend-products`);
                     setRecommendedProducts(response.data);
                     setShowRecommendations(true);
+                    
                 } catch (error) {
                     console.error('Error fetching recommended products:', error.response ? error.response.data : error.message);
                 }
@@ -197,7 +198,7 @@ const Shop = () => {
                         >
                             <div className='product-img'>
                                 <img
-                                    src={product.image_url || 'https://via.placeholder.com/150'}
+                                    src={product.product_image || 'https://via.placeholder.com/150'}
                                     alt={product.product_name || 'Product Image'}
                                 />
                             </div>
@@ -231,7 +232,7 @@ const Shop = () => {
                             >
                                 <div className='product-img'>
                                     <img
-                                        src={product.image_url || 'https://via.placeholder.com/150'}
+                                        src={product.product_image || 'https://via.placeholder.com/150'}
                                         alt={product.product_name || 'Product Image'}
                                     />
                                 </div>
@@ -281,7 +282,7 @@ const Shop = () => {
                             >
                                 <div className='product-img'>
                                     <img
-                                        src={product.image_url || 'https://via.placeholder.com/150'}
+                                        src={product.product_image || 'https://via.placeholder.com/150'}
                                         alt={product.product_name || 'Product Image'}
                                     />
                                 </div>

@@ -131,6 +131,7 @@ router.get('/recommend-products', async (req, res) => {
         // Fetch the top 4 cart interactions per product code
         const [rankedInteractions] = await db.query(`
             SELECT
+                p.product_image,
                 p.product_code,
                 p.product_name,
                 p.price,

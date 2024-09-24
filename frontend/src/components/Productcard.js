@@ -8,6 +8,7 @@ import './modal.css';
 import { IoCartOutline } from "react-icons/io5";
 import { FiShoppingCart } from "react-icons/fi";
 import { LuShoppingBag } from "react-icons/lu";
+import ProductModal1 from './ProductModal1';
 
 const shuffleArray = (array) => {
     let currentIndex = array.length, randomIndex;
@@ -221,6 +222,7 @@ const ProductList = () => {
     }
 
     const paginatedProducts = products.slice(currentPage * PAGE_SIZE, (currentPage + 1) * PAGE_SIZE);
+    
 
     return (
         <div className='product-list'>
@@ -247,7 +249,13 @@ const ProductList = () => {
             </div>
 
             {/* Render the modal for selected product */}
-            <ProductModal
+            {/* <ProductModal
+                isOpen={isModalOpen}
+                product={selectedProduct}
+                onClose={closeModal}
+            /> */}
+
+            <ProductModal1
                 isOpen={isModalOpen}
                 product={selectedProduct}
                 onClose={closeModal}

@@ -148,7 +148,7 @@ const Navigation = () => {
                                                     <a class="nav-link" href="/signup">Signup</a>
                                                 </li>
                                                 <li class="nav-item">
-                                                    <a class="nav-link" href="/login">Login</a>
+                                                    <a class="nav-link bg-pink rounded-2 px-2 text-white" href="/login">Login</a>
                                                 </li>
                                                 </>
                                     ) : (

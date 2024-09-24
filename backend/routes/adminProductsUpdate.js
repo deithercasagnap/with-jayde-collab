@@ -78,9 +78,9 @@ router.get('/product-category', async (req, res) => {
 
 
 // Update Product Route
-router.put('/admin-update-products/:product_code', async (req, res) => {
-    const { product_code } = req.params;
-    const { product_name, description, category_id, price, quantity, size, expiration_date, product_status, product_image } = req.body;
+router.put('/admin-update-products/:product_id', async (req, res) => {
+    const { product_id } = req.params;
+    const { product_code, product_name, description, category_id, price, quantity, size, expiration_date, product_status, product_image } = req.body;
 
 
 
@@ -97,8 +97,9 @@ router.put('/admin-update-products/:product_code', async (req, res) => {
             expiration_date = ?,
             product_status = ?,
             product_image = ?,
+            product_code = ?,
             product_update = NOW()
-        WHERE product_code = ?;
+        WHERE product_id = ?;
     `;
 
     try {
@@ -113,7 +114,8 @@ router.put('/admin-update-products/:product_code', async (req, res) => {
             expiration_date,
             product_status,
             product_image,
-            product_code
+            product_code,
+            product_id
         ]);
 
         // Check if the update was successful
