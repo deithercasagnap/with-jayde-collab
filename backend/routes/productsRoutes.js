@@ -62,7 +62,7 @@ router.get('/products-top-picks', async (req, res) => {
     try {
         // Fetch the top 4 products based on the highest interaction count
         const [rows] = await db.query(`
-            SELECT product_id, product_code, product_name, price, description, quantity, interaction_count
+            SELECT product_id, product_code, product_name, price, description, quantity, product_image, interaction_count
             FROM product
             ORDER BY interaction_count DESC
             LIMIT 4
@@ -84,7 +84,7 @@ router.get('/products', async (req, res) => {
     try {
         // Fetch all products and their categories
         const [rows] = await db.query(`
-            SELECT p.product_id, p.product_code, p.product_name, p.price ,p.description, p.quantity, c.category_name
+            SELECT p.product_id, p.product_code, p.product_name, p.price ,p.description, p.quantity, p.product_image, c.category_name
             FROM product p
             INNER JOIN category c ON p.category_id = c.category_id
         `);
@@ -136,7 +136,7 @@ router.get('/recommend-products', async (req, res) => {
                 p.product_name,
                 p.price,
                 p.quantity,
-                MAX(ui.interaction_count) AS interaction_count, -- use MAX() to avoid ONLY_FULL_GROUP_BY issues
+                MAX(ui.interaction_count) AS interaction_count,
                 ui.interaction_type
             FROM
                 user_product_interactions ui
@@ -145,10 +145,17 @@ router.get('/recommend-products', async (req, res) => {
             WHERE
                 ui.interaction_type = 'cart'
             GROUP BY
-                p.product_code, p.product_name, p.price, p.quantity, ui.interaction_type
+                p.product_image, 
+                p.product_code, 
+                p.product_name, 
+                p.price, 
+                p.quantity, 
+                ui.interaction_type
             ORDER BY
                 interaction_count DESC
-            LIMIT 4;
+            LIMIT 6;
+
+
         `);
 
         res.json(rankedInteractions);
@@ -184,7 +191,7 @@ router.post('/products/recommendations', async (req, res) => {
         // Fetch products from the same category, excluding the selected product
         console.log(`Querying for recommended products in category: ${category_id} excluding product_id: ${product_id}`);
         const [recommendedProducts] = await db.query(`
-            SELECT p.product_id, p.category_id, p.product_code, p.product_name, p.price, p.description, p.quantity
+            SELECT p.product_id, p.category_id, p.product_code, p.product_name, p.price, p.description, p.quantity, p.product_image
             FROM product p
             WHERE p.category_id = ? AND p.product_id != ?
         `, [category_id, product_id]);

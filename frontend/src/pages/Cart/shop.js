@@ -272,7 +272,8 @@ const Shop = () => {
 
             {Object.entries(groupedProducts).map(([category, productsInCategory]) => (
                 <div key={category} className='category-section '>
-                    <h2>{category}</h2>
+                    {/* <h2>{category}</h2> */}
+                    <h2>All Products</h2>
                     <div className='product-list'>
                         {paginate(productsInCategory, currentCategoryPages[category] || 1, productsPerPage).map((product) => (
                             <div
@@ -280,8 +281,8 @@ const Shop = () => {
                                 className='product-item'
                                 onClick={() => handleProductClick(product.product_code)}
                             >
-                                <div className='product-img'>
-                                    <img
+                                <div className='product-img  d-flex align-items-end'>
+                                    <img class="image-icon "
                                         src={product.product_image || 'https://via.placeholder.com/150'}
                                         alt={product.product_name || 'Product Image'}
                                     />

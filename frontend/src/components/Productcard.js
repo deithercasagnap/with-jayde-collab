@@ -4,11 +4,13 @@ import PropTypes from 'prop-types';
 import { cartEventEmitter } from './eventEmitter';
 import ProductModal from './ProductModal';  // Import the modal
 import './modal.css';
+import './ProductCard.css'
 
 import { IoCartOutline } from "react-icons/io5";
 import { FiShoppingCart } from "react-icons/fi";
 import { LuShoppingBag } from "react-icons/lu";
 import ProductModal1 from './ProductModal1';
+import ViewProductModal from './ViewProductModal';
 
 const shuffleArray = (array) => {
     let currentIndex = array.length, randomIndex;
@@ -18,6 +20,7 @@ const shuffleArray = (array) => {
         currentIndex--;
         [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
     }
+
 
     return array;
 };
@@ -32,36 +35,42 @@ const ProductCard = React.memo(({ product, onAddToCart, onProductInteraction, on
 
     return (
         <>
-        <div class="card" style={{width: '18rem'}}>
-                <img    src={product.image_url || "https://th.bing.com/th/id/OIP.Ga6O6AINM1RD05I18IJMfQHaHa?rs=1&pid=ImgDetMain"} 
-                        width="50" 
-                        height="200" 
-                        class="card-img-top" 
-                        alt={product.product_name || 'Product Image'}
-                        onClick={() => onProductClick(product)}  // Trigger modal on click
-                />
-                <div class="card-body">
-                    <h5 class="card-title">{product.product_name || 'No product name'}</h5>
-                    <p class="card-text">Quantity: {product.quantity}</p>
+        <div className="card border border-danger" style={{ width: '18rem' }}>
+        <img
+            src={product.product_image}
+            width="50"
+            height="200"
+            className="card-img-top"
+            alt={product.product_name || 'Product Image'}
+            onClick={() => onProductClick(product)} // Trigger modal on click
+        />
 
-                    <div class="d-flex justify-content-between align-items-center w-100">
-                        <div class="col-auto">
-                            <button onClick={() => onAddToCart(product)} type="button" class="btn btn-primary"><FiShoppingCart class="me-2" width="40" height="40"/>Add to Cart</button>
-                        </div>
-                        <div class="col-auto">
-                            <button onClick={() => onProductInteraction(product.product_code, 'view')} type="button" class="btn btn-danger"><LuShoppingBag class="me-2" />Buy Now</button>
-                        </div>
-                    </div>
-                    
-                </div>
-            </div>
+  <div className="card-body">
+    <h5 className="card-title">{product.product_name || 'No product name'}</h5>
+    <p className="card-text">Quantity: {product.quantity}</p>
+
+    <div className="d-flex justify-content-between align-items-end w-100 ">
+      <div className="col-auto align-items-end">
+        <button onClick={() => onAddToCart(product)} type="button" className="btn btn-primary">
+          <FiShoppingCart className="me-2" width="40" height="40" />Add to Cart
+        </button>
+      </div>
+      <div className="col-auto align-items-end">
+        <button onClick={() => onProductInteraction(product.product_code, 'view')} type="button" className="btn btn-danger">
+          <LuShoppingBag className="me-2" />Buy Now
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 
         {/* <div className='procard' style={{ width: '22%', margin: '1%' }}>
             <div className='productimg' style={{ width: '100%', height: '65%' }}>
                 <img
                     style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                    src={product.image_url || 'https://via.placeholder.com/150'}
+                    src={product.product_image || 'https://via.placeholder.com/150'}
                     alt={product.product_name || 'Product Image'}
                     onClick={() => onProductClick(product)}  // Trigger modal on click
                 />
@@ -83,7 +92,7 @@ const ProductCard = React.memo(({ product, onAddToCart, onProductInteraction, on
 
 ProductCard.propTypes = {
     product: PropTypes.shape({
-        image_url: PropTypes.string,
+        product_image: PropTypes.string,
         product_name: PropTypes.string,
         product_code: PropTypes.string.isRequired,
         quantity: PropTypes.number
@@ -235,6 +244,7 @@ const ProductList = () => {
 
                 {paginatedProducts.map((product) => (
                     <ProductCard
+                        class="border border-danger"
                         key={product.product_code}
                         product={product}
                         onAddToCart={handleAddToCart}
@@ -255,7 +265,7 @@ const ProductList = () => {
                 onClose={closeModal}
             /> */}
 
-            <ProductModal1
+            <ProductModal
                 isOpen={isModalOpen}
                 product={selectedProduct}
                 onClose={closeModal}

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Button } from 'react-bootstrap';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import '../admin.css';
+
 import AdminNav from '../components/AdminNav';
 import AdminHeader from '../components/AdminHeader';
 import TopProduct from '../components/TopProduct';
@@ -118,53 +118,46 @@ const Products = () => {
               <TopProduct />
             </div>
 
-            <div className='product-two d-flex justify-content-between'>
-              <div className='order-header border border-primary d-flex justify-content-between'>
-                
+            <div className='product-two justify-content-between'>
 
-                <div className='d-flex justify-content-between align-items-center order-options  border border-danger'>
-
-                  <div className='col-auto order-search '>
-                    <form class="d-flex">
-                      <input type='search' placeholder="Search products..." />
-                      <button type="submit">Search</button>
-                    </form>
+            <div className='d-flex justify-content-between align-items-center border border-secondary px-2'>
+                  {/* Search Form */}
+                  <div className='order-search'>
+                      <form className="d-flex">
+                          <input type='search' className='form-control me-3' placeholder="Search products..." />
+                          <button type="submit" className="btn btn-primary">Search</button>
+                      </form>
                   </div>
-                  
-                  <div className='col-auto order-print'>
-                    <div className='d-flex justify-content-between align-items-center'>
-                    <div className='col-auto order-print'>
-                      <button>Print Order Summary</button>
-                    </div>
 
-                    <div className='col-auto order-sort d-flex align-items-center'>
-                      <div class="d-flex align-items-center">
-                        <label class="m-0" htmlFor="sort">Sort By</label>
+                  {/* Right Side Options */}
+                  <div className='d-flex justify-content-end align-items-center gap-4'>
+                      {/* Print Button */}
+                      <button className="btn btn-warning">Print Order Summary</button>
+
+                      {/* Sort Dropdown */}
+                      <div className='order-sort d-flex align-items-center'>
+                          <label className="me-2 mb-0" htmlFor="sort">Sort By</label>
+                          <select name="sort" id="sort" className="form-select">
+                              <option value="date">Date</option>
+                              <option value="status">Status</option>
+                              <option value="id">ID</option>
+                              <option value="customer-id">Customer</option>
+                          </select>
                       </div>
-                      <div>
-                        <select name="sort" id="sort" class="ms-2">
-                          <option value="date">Date</option>
-                          <option value="status">Status</option>
-                          <option value="id">ID</option>
-                          <option value="customer-id">Customer</option>
-                        </select>
-                      </div>
-                      
-                    
-                    </div>
 
-                    <div className='col-auto  order-add'>
-                      <Button variant="primary" onClick={handleShowAddModal}>
-                        <FiPlus class="me-2"/>Add Product
-                      </Button>
-                    </div>
+                      {/* Add Product Button */}
+                      <div className='order-add'>
+                          <Button variant="primary" onClick={handleShowAddModal}>
+                              <FiPlus className="me-2" /> Add Product
+                          </Button>
+                      </div>
                   </div>
-                  </div>
-                </div>
               </div>
 
               <ProductTable handleShowProductModal={handleShowProductModal} />
             </div>
+
+
           </div>
         </div>
       </div>

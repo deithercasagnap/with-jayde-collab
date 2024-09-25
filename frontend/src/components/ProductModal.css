@@ -1,0 +1,83 @@
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: white;
+    border-radius: 8px;
+    padding: 20px;
+    position: relative;
+    max-height: 90vh; /* Limits modal height */
+    max-width: 700px;
+    overflow-y: auto; /* Enables scrolling */
+}
+
+.modal-body img {
+    max-width: 50%;
+    height: auto;
+}
+
+.modal-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: transparent;
+    border: none;
+    font-size: 1.2em;
+    cursor: pointer;
+}
+
+.recommendations ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.recommendations li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.recommendations img {
+    width: 50px;
+    margin-right: 10px;
+}
+
+
+
+
+
+
+
+
+
+
+.recommendation-grid {
+    display: flex;
+    flex-direction: row; /* Arranges items horizontally */
+    gap: 20px; /* Adds spacing between items */
+    justify-content: center; /* Centers items horizontally */
+    flex-wrap: wrap; /* Wraps items to a new line if they overflow the container */
+}
+
+.recommendation-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 150px;
+}
+
+.recommendation-item img {
+    width: 100px;
+    height: auto;
+    margin-bottom: 10px;
+}
